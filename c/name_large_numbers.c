@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <unistd.h>
 
 char *digits[] = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
 char *teens[] = {"ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"};
@@ -17,6 +18,15 @@ struct triple {
   int b;
   int c;
 };
+
+void usage(char *argv[]) {
+  fprintf(stderr,
+          "Usage: %s [-o output file]\n"
+          " -h\tDisplay this usage statement.\n"
+          "",
+          argv[0]);
+  exit(EXIT_FAILURE);
+}
 
 /*
  * Print an error message and exit the program.
@@ -351,8 +361,35 @@ char *representation_of_number(char *num_string) {
   return ret;
 }
 
-int main() {
+int main(int argc, char *argv[]) {
   srand(time(0));
+
+  FILE *outfile = NULL;
+
+  // Handle program arguments.
+  int opt;
+  char *optstring = "hSo:t:";
+  while ((opt = getopt(argc, argv, optstring)) != -1) {
+    if (opt == 'S') {
+    }
+    if (opt == 'h') {
+      usage(argv);
+    }
+    if (opt == 't') {
+    }
+    if (opt == 'o') {
+      outfile = fopen(optarg, "wb");
+      if (outfile == 0) {
+        perror("fopen");
+        usage(argv);
+      }
+    }
+  }
+
+  if (optind != argc) {
+    fprintf(stderr, "Wrong number of arguments.\n");
+    usage(argv);
+  }
 
   char *num_str = generate_numerical_string(306);
   print_with_separators(num_str, 0);
