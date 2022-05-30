@@ -13,18 +13,21 @@ char *small_base[] = {"", "million", "billion", "trillion", "quadrillion", "quin
 char *tens_base[] = {"", "thousand", "million", "billion", "trillion", "quadrillion", "quintillion", "sextillion", "septillion", "octillion", "nonillion", "decillion"};
 char *teens_base[] = {"", "decillion", "vigintillion", "trigintillion", "quadragintillion", "quinquagintillion", "sexagintillion", "septuagintillion", "octogintillion", "nonagintillion"};
 
+char *program_name;
+
 struct triple {
   int a;
   int b;
   int c;
 };
 
-void usage(char *argv[]) {
+void usage() {
   fprintf(stderr,
-          "Usage: %s [-o output file]\n"
-          " -h\tDisplay this usage statement.\n"
-          "",
-          argv[0]);
+      "Usage: %s [-o output file] [-n number] [-i input file] [-l length] [-d delimiter]\n"
+      " -e\tDon't print the number with a delimiter.\n"
+      " -h\tDisplay this usage statement.\n"
+      "",
+      program_name);
   exit(EXIT_FAILURE);
 }
 
@@ -35,8 +38,8 @@ void usage(char *argv[]) {
  *     str: The message to print.
  */
 void die(char *str) {
-  printf("Error: %s\n", str);
-  exit(EXIT_FAILURE);
+  fprintf(stderr, "Error: %s\n", str);
+  usage();
 }
 
 /*
@@ -95,18 +98,18 @@ struct triple *group_into_triples(char *num_string, int *len) {
     int m = (i + padding) / 3;
     int n = (i + padding) % 3;
     switch (n) {
-    case 0:
-      triples[m].a = num_string[i] - '0';
-      break;
-    case 1:
-      triples[m].b = num_string[i] - '0';
-      break;
-    case 2:
-      triples[m].c = num_string[i] - '0';
-      break;
-    default:
-      die("Invalid index.");
-      break;
+      case 0:
+        triples[m].a = num_string[i] - '0';
+        break;
+      case 1:
+        triples[m].b = num_string[i] - '0';
+        break;
+      case 2:
+        triples[m].c = num_string[i] - '0';
+        break;
+      default:
+        die("Invalid index.");
+        break;
     }
   }
 
@@ -126,7 +129,7 @@ struct triple *group_into_triples(char *num_string, int *len) {
  * Returns:
  *     None
  */
-void print_with_separators(char *num_string, char separator) {
+void print_with_separators(char *num_string, char separator, FILE *f) {
   if (separator == 0) {
     separator = ',';
   }
@@ -148,20 +151,20 @@ void print_with_separators(char *num_string, char separator) {
   // Don't print leading zeroes.
   if (groups[0].b != 0) {
     if (groups[0].a != 0) {
-      printf("%d", groups[0].a);
+      fprintf(f, "%d", groups[0].a);
     }
-    printf("%d", groups[0].b);
+    fprintf(f, "%d", groups[0].b);
   }
-  printf("%d", groups[0].c);
+  fprintf(f, "%d", groups[0].c);
 
   // Print the remainder of the number.
   for (int i = 1; i < len; i++) {
-    printf("%c", separator);
-    printf("%d", groups[i].a);
-    printf("%d", groups[i].b);
-    printf("%d", groups[i].c);
+    fprintf(f, "%c", separator);
+    fprintf(f, "%d", groups[i].a);
+    fprintf(f, "%d", groups[i].b);
+    fprintf(f, "%d", groups[i].c);
   }
-  printf("\n");
+  fprintf(f, "\n");
 }
 
 /*
@@ -361,42 +364,103 @@ char *representation_of_number(char *num_string) {
   return ret;
 }
 
-int main(int argc, char *argv[]) {
-  srand(time(0));
+void print_representation_of_number(char *number, FILE *f){
+  char *text = representation_of_number(number);
+  fprintf(f, "%s\n", text);
+  free(text);
+}
 
-  FILE *outfile = NULL;
+int main(int argc, char *argv[]) {
+  program_name = argv[0];
+  srand(time(0));
+  char *number = NULL;
+  char delimiter = 0;
+  int length = 306;
+  int no_delimiter = 0;
+
+  FILE *outfile = stdout;
+  FILE *infile = NULL;
 
   // Handle program arguments.
   int opt;
-  char *optstring = "hSo:t:";
+  char *optstring = "ho:n:i:l:d:er";
   while ((opt = getopt(argc, argv, optstring)) != -1) {
-    if (opt == 'S') {
-    }
-    if (opt == 'h') {
-      usage(argv);
-    }
-    if (opt == 't') {
-    }
     if (opt == 'o') {
       outfile = fopen(optarg, "wb");
       if (outfile == 0) {
         perror("fopen");
-        usage(argv);
+        usage();
       }
+    }
+    if (opt == 'n') {
+      number=malloc(strlen(optarg)+1);
+      bzero(number, strlen(optarg)+1);
+      strncpy(number, optarg, strlen(optarg));
+    }
+    if (opt == 'i') {
+      infile = fopen(optarg, "rb");
+      if (infile == 0) {
+        perror("fopen");
+        usage();
+      }
+    }
+    if (opt == 'l') {
+      length = atoi(optarg);
+      if(length <= 0){
+        die("Invalid length.");
+      }
+    }
+    if (opt == 'd') {
+      delimiter = optarg[0];
+    }
+    if (opt == 'e') {
+      no_delimiter=1;
+    }
+    if (opt == 'h') {
+      usage();
     }
   }
 
   if (optind != argc) {
     fprintf(stderr, "Wrong number of arguments.\n");
-    usage(argv);
+    usage();
   }
 
-  char *num_str = generate_numerical_string(306);
-  print_with_separators(num_str, 0);
+  // Handle the case where a number was specified.
+  if(number){
+    if(!no_delimiter){
+      print_with_separators(number, delimiter, outfile);
+    }
+    print_representation_of_number(number, outfile);
+    exit(EXIT_SUCCESS);
+  }
 
-  char *text;
-  text = representation_of_number(num_str);
-  puts(text);
-  free(text);
-  free(num_str);
+  // Handle the case where the program is taking a file full of numbers.
+  if(infile){
+    char *line = NULL;
+    size_t len = 0;
+    ssize_t nread;
+
+    while ((nread = getline(&line, &len, infile)) != -1) {
+      line[strlen(line)-1] = 0;
+      if(!no_delimiter){
+        print_with_separators(number, delimiter, outfile);
+      }
+      print_representation_of_number(line, outfile);
+      fprintf(outfile, "\n");
+    }
+
+    free(line);
+    fclose(infile);
+    exit(EXIT_SUCCESS);
+  }
+
+  // Handle the case where the program returns a random number.
+  number = generate_numerical_string(length);
+  if(!no_delimiter){
+    print_with_separators(number, delimiter, outfile);
+  }
+  print_representation_of_number(number, outfile);
+  free(number);
+  exit(EXIT_SUCCESS);
 }
