@@ -2,13 +2,13 @@ CC := gcc
 
 all: build/name_large_numbers
 
-build/name_large_numbers: name_large_numbers.c build/libnum.o
+build/name_large_numbers: src/name_large_numbers.c build/libnum.o
 	mkdir -p build/
-	${CC} build/libnum.o name_large_numbers.c -o $@
+	${CC} build/libnum.o src/name_large_numbers.c -o $@
 
-build/libnum.o: libnum.c libnum.h
+build/libnum.o: src/libnum.c src/libnum.h
 	mkdir -p build/
-	${CC} -c libnum.c -o $@
+	${CC} -c src/libnum.c -o $@
 
 clean:
 	rm -rf build/
