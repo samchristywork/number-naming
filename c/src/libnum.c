@@ -5,8 +5,6 @@
 
 #include "libnum.h"
 
-char *program_name;
-
 char *digits[] = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
 char *teens[] = {"ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"};
 char *tens[] = {"zero", "one", "twenty", "thirty", "fourty", "fifty", "sixty", "seventy", "eighty", "ninety"};
@@ -14,16 +12,6 @@ char *digit_prefixes[] = {"", "un", "duo", "tres", "quattuor", "quin", "ses", "s
 char *small_base[] = {"", "million", "billion", "trillion", "quadrillion", "quintillion", "sextillion", "septillion", "octillion", "nonillion"};
 char *tens_base[] = {"", "thousand", "million", "billion", "trillion", "quadrillion", "quintillion", "sextillion", "septillion", "octillion", "nonillion", "decillion"};
 char *teens_base[] = {"", "decillion", "vigintillion", "trigintillion", "quadragintillion", "quinquagintillion", "sexagintillion", "septuagintillion", "octogintillion", "nonagintillion"};
-
-void usage() {
-  fprintf(stderr,
-      "Usage: %s [-o output file] [-n number] [-i input file] [-l length] [-d delimiter]\n"
-      " -e\tDon't print the number with a delimiter.\n"
-      " -h\tDisplay this usage statement.\n"
-      "",
-      program_name);
-  exit(EXIT_FAILURE);
-}
 
 /*
  * Print an error message and exit the program.
@@ -33,7 +21,7 @@ void usage() {
  */
 void die(char *str) {
   fprintf(stderr, "Error: %s\n", str);
-  usage();
+  exit(EXIT_FAILURE);
 }
 
 /*
@@ -362,13 +350,4 @@ void print_representation_of_number(char *number, FILE *f){
   char *text = representation_of_number(number);
   fprintf(f, "%s\n", text);
   free(text);
-}
-
-void set_program_name(char *name) {
-  program_name=malloc(strlen(name)+1);
-  strcpy(program_name, name);
-}
-
-void free_program_name() {
-  free(program_name);
 }

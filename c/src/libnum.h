@@ -9,7 +9,6 @@ struct triple {
   int c;
 };
 
-void usage();
 void die(char *str);
 char *generate_numerical_string(int num_digits);
 struct triple *group_into_triples(char *num_string, int *len);
@@ -18,6 +17,5 @@ char *triple_name(struct triple t);
 char *base_from_index(int order);
 char *representation_of_number(char *num_string);
 void print_representation_of_number(char *number, FILE *f);
-void set_program_name(char *name);
 
 #endif

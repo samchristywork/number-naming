@@ -6,8 +6,22 @@
 
 #include "libnum.h"
 
+char *program_name;
+
+void usage() {
+  fprintf(stderr,
+      "Usage: %s [-o output file] [-n number] [-i input file] [-l length] [-d delimiter]\n"
+      " -e\tDon't print the number with a delimiter.\n"
+      " -h\tDisplay this usage statement.\n"
+      "",
+      program_name);
+  exit(EXIT_FAILURE);
+}
+
 int main(int argc, char *argv[]) {
-  set_program_name(argv[0]);
+  program_name=malloc(strlen(argv[0])+1);
+  strcpy(program_name, argv[0]);
+
   srand(time(0));
   char *number = NULL;
   char delimiter = 0;
@@ -98,5 +112,6 @@ int main(int argc, char *argv[]) {
   }
   print_representation_of_number(number, outfile);
   free(number);
+  free(program_name);
   exit(EXIT_SUCCESS);
 }
