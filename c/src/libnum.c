@@ -174,12 +174,21 @@ char *triple_name(struct triple t) {
 
   // The representation of the "ones" place varies based on what is in the "tens" place.
   if (t.b == 0) {
-    strncpy(_ones, digits[t.c], 32);
+    if (t.c == 0) {
+    }else{
+      strncpy(_ones, digits[t.c], 32);
+    }
   } else if (t.b == 1) {
-    strncpy(_ones, teens[t.c], 32);
+    if (t.c == 0) {
+    }else{
+      strncpy(_ones, teens[t.c], 32);
+    }
   } else {
     strncpy(_tens, tens[t.b], 32);
-    strncpy(_ones, digits[t.c], 32);
+    if (t.c == 0) {
+    }else{
+      strncpy(_ones, digits[t.c], 32);
+    }
   }
 
   // Calculate the size of the output string.
