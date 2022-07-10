@@ -181,6 +181,62 @@ they are basically interchangeable. "Seventy" is the longest word in the ten's
 place, so that place cannot be changed. Three choices in two slots is
 3<sup>2</sup>=9 different choices.
 
+### Lexicographic Ordering
+
+Alphabetically speaking, the first number is "eight" and the last is "zero". It
+actually surprised me that both the first and last numbers were single digit
+ones. The sole reason for this is that the number zero happens to be the last
+digit alphabetically, and unable to be a prefix to other numbers. There cannot
+be a "zero thousand" for example.
+
+Here is the abridged list of numbers:
+
+```
+eight
+eighteen
+eighteen thousand
+eighteen thousand, eight
+eighteen thousand, eighteen
+eighteen thousand, eight hundred
+eighteen thousand, eight hundred eight
+eighteen thousand, eight hundred eighteen
+eighteen thousand, eight hundred eighty
+eighteen thousand, eight hundred eighty eight
+eighteen thousand, eight hundred eighty five
+eighteen thousand, eight hundred eighty four
+eighteen thousand, eight hundred eighty nine
+eighteen thousand, eight hundred eighty one
+eighteen thousand, eight hundred eighty seven
+eighteen thousand, eight hundred eighty six
+eighteen thousand, eight hundred eighty three
+eighteen thousand, eight hundred eighty two
+eighteen thousand, eight hundred eleven
+eighteen thousand, eight hundred fifteen
+
+...
+
+two thousand, two hundred thirty nine
+two thousand, two hundred thirty one
+two thousand, two hundred thirty seven
+two thousand, two hundred thirty six
+two thousand, two hundred thirty three
+two thousand, two hundred thirty two
+two thousand, two hundred three
+two thousand, two hundred twelve
+two thousand, two hundred twenty
+two thousand, two hundred twenty eight
+two thousand, two hundred twenty five
+two thousand, two hundred twenty four
+two thousand, two hundred twenty nine
+two thousand, two hundred twenty one
+two thousand, two hundred twenty seven
+two thousand, two hundred twenty six
+two thousand, two hundred twenty three
+two thousand, two hundred twenty two
+two thousand, two hundred two
+zero
+```
+
 ## License
 
 This work is licensed under the GNU General Public License version 3 (GPLv3).
