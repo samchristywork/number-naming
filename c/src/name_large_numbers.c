@@ -94,7 +94,7 @@ int main(int argc, char *argv[]) {
     while ((nread = getline(&line, &len, infile)) != -1) {
       line[strlen(line)-1] = 0;
       if(!no_delimiter){
-        print_with_separators(number, delimiter, outfile);
+        print_with_separators(line, delimiter, outfile);
       }
       print_representation_of_number(line, outfile);
       fprintf(outfile, "\n");
