@@ -79,6 +79,11 @@ quadrillion, four hundred ninety three trillion, four hundred twenty billion,
 one hundred three million, nine hundred ten thousand, four hundred fifty seven
 ```
 
+## Special Numbers
+
+One of my main motivations for writing this code was to extract interesting
+properties from lists of numbers. Here are a few things I've found out.
+
 ## License
 
 This work is licensed under the GNU General Public License version 3 (GPLv3).
