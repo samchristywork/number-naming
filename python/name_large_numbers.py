@@ -1,4 +1,6 @@
+import getopt
 import random # Only needed for generate_numerical_string().
+import sys
 
 digits = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', ]
 teens = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', ]
@@ -222,7 +224,26 @@ def representation_of_number(num_string):
     num_text = num_text.rstrip(',')
     return num_text
 
+def usage():
+    Exception("Not Implemented")
+
 if __name__ == "__main__":
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], 'ho:n:i:l:d:e', ['help', 'output', 'number', 'input', 'length', 'delimiter'])
+    except getopt.GetoptError:
+        usage()
+        sys.exit(2)
+
+    for opt, arg in opts:
+        if opt in ('-h', '--help'):
+            usage()
+            sys.exit(2)
+        elif opt in ('-o', '--output'):
+            pass
+        else:
+            usage()
+            sys.exit(2)
+
     n = generate_numerical_string(306)
     print_with_separators(n)
     print(representation_of_number(n))
