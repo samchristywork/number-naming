@@ -84,6 +84,103 @@ one hundred three million, nine hundred ten thousand, four hundred fifty seven
 One of my main motivations for writing this code was to extract interesting
 properties from lists of numbers. Here are a few things I've found out.
 
+### Long Numbers
+
+The longest English representation of a number that is 306 digits or less is:
+
+```
+373,373,373,373,373,373,373,373,373,373,373,373,373,373,373,373,373,373,373,373,
+373,373,373,373,373,373,373,373,373,373,373,373,373,373,373,373,373,373,373,373,
+373,373,373,373,373,373,373,373,373,373,373,373,373,373,373,373,373,373,373,373,
+373,373,373,373,373,373,373,373,373,373,373,373,373,373,373,373,373,373,373,373,
+373,373,373,373,373,373,373,373,373,373,373,373,373,373,373,373,373,373,373,373,
+373,373
+
+three hundred seventy three centillion, three hundred seventy three
+novennonagintillion, three hundred seventy three octononagintillion, three
+hundred seventy three septnonagintillion, three hundred seventy three
+sesnonagintillion, three hundred seventy three quinnonagintillion, three hundred
+seventy three quattuornonagintillion, three hundred seventy three
+tresnonagintillion, three hundred seventy three duononagintillion, three hundred
+seventy three unnonagintillion, three hundred seventy three nonagintillion,
+three hundred seventy three novenoctogintillion, three hundred seventy three
+octooctogintillion, three hundred seventy three septoctogintillion, three
+hundred seventy three sesoctogintillion, three hundred seventy three
+quinoctogintillion, three hundred seventy three quattuoroctogintillion, three
+hundred seventy three tresoctogintillion, three hundred seventy three
+duooctogintillion, three hundred seventy three unoctogintillion, three hundred
+seventy three octogintillion, three hundred seventy three novenseptuagintillion,
+three hundred seventy three octoseptuagintillion, three hundred seventy three
+septseptuagintillion, three hundred seventy three sesseptuagintillion, three
+hundred seventy three quinseptuagintillion, three hundred seventy three
+quattuorseptuagintillion, three hundred seventy three tresseptuagintillion,
+three hundred seventy three duoseptuagintillion, three hundred seventy three
+unseptuagintillion, three hundred seventy three septuagintillion, three hundred
+seventy three novensexagintillion, three hundred seventy three
+octosexagintillion, three hundred seventy three septsexagintillion, three
+hundred seventy three sessexagintillion, three hundred seventy three
+quinsexagintillion, three hundred seventy three quattuorsexagintillion, three
+hundred seventy three tressexagintillion, three hundred seventy three
+duosexagintillion, three hundred seventy three unsexagintillion, three hundred
+seventy three sexagintillion, three hundred seventy three
+novenquinquagintillion, three hundred seventy three octoquinquagintillion, three
+hundred seventy three septquinquagintillion, three hundred seventy three
+sesquinquagintillion, three hundred seventy three quinquinquagintillion, three
+hundred seventy three quattuorquinquagintillion, three hundred seventy three
+tresquinquagintillion, three hundred seventy three duoquinquagintillion, three
+hundred seventy three unquinquagintillion, three hundred seventy three
+quinquagintillion, three hundred seventy three novenquadragintillion, three
+hundred seventy three octoquadragintillion, three hundred seventy three
+septquadragintillion, three hundred seventy three sesquadragintillion, three
+hundred seventy three quinquadragintillion, three hundred seventy three
+quattuorquadragintillion, three hundred seventy three tresquadragintillion,
+three hundred seventy three duoquadragintillion, three hundred seventy three
+unquadragintillion, three hundred seventy three quadragintillion, three hundred
+seventy three noventrigintillion, three hundred seventy three octotrigintillion,
+three hundred seventy three septtrigintillion, three hundred seventy three
+sestrigintillion, three hundred seventy three quintrigintillion, three hundred
+seventy three quattuortrigintillion, three hundred seventy three
+trestrigintillion, three hundred seventy three duotrigintillion, three hundred
+seventy three untrigintillion, three hundred seventy three trigintillion, three
+hundred seventy three novenvigintillion, three hundred seventy three
+octovigintillion, three hundred seventy three septvigintillion, three hundred
+seventy three sesvigintillion, three hundred seventy three quinvigintillion,
+three hundred seventy three quattuorvigintillion, three hundred seventy three
+tresvigintillion, three hundred seventy three duovigintillion, three hundred
+seventy three unvigintillion, three hundred seventy three vigintillion, three
+hundred seventy three novendecillion, three hundred seventy three octodecillion,
+three hundred seventy three septdecillion, three hundred seventy three
+sesdecillion, three hundred seventy three quindecillion, three hundred seventy
+three quattuordecillion, three hundred seventy three tresdecillion, three
+hundred seventy three duodecillion, three hundred seventy three undecillion,
+three hundred seventy three decillion, three hundred seventy three nonillion,
+three hundred seventy three octillion, three hundred seventy three septillion,
+three hundred seventy three sextillion, three hundred seventy three quintillion,
+three hundred seventy three quadrillion, three hundred seventy three trillion,
+three hundred seventy three billion, three hundred seventy three million, three
+hundred seventy three thousand, three hundred seventy three
+```
+
+There are actually other numbers of equivalent length. They are all permutations
+of the following numbers under 1,000:
+
+```
+three hundred seventy three
+three hundred seventy seven
+three hundred seventy eight
+seven hundred seventy three
+seven hundred seventy seven
+seven hundred seventy eight
+eight hundred seventy three
+eight hundred seventy seven
+eight hundred seventy eight
+```
+
+Because "three", "seven", and "eight" are all tied for the longest one's digit,
+they are basically interchangeable. "Seventy" is the longest word in the ten's
+place, so that place cannot be changed. Three choices in two slots is
+3<sup>2</sup>=9 different choices.
+
 ## License
 
 This work is licensed under the GNU General Public License version 3 (GPLv3).
