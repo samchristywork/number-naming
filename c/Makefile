@@ -18,3 +18,5 @@ build/libnum.o: src/libnum.c src/libnum.h
 
 clean:
 	rm -rf build/
+
+.PHONY: clean test
