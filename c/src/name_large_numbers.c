@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
 
   // Handle program arguments.
   int opt;
-  char *optstring = "ho:n:i:l:d:er";
+  char *optstring = "ho:n:i:l:d:e";
   while ((opt = getopt(argc, argv, optstring)) != -1) {
     if (opt == 'o') {
       outfile = fopen(optarg, "wb");
